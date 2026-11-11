@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tenitoh Restaurant, Bar and Accommodation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background-color: #FFF8E7;
+    color: #3B2A20;
+    font-family: 'Poppins', sans-serif;
+  }
+  header {
+    background-color: #A8432A;
+    color: #FFF8E7;
+    padding: 16px;
+  }
+  header h2 {
+    margin: 0 0 8px 0;
+    font-family: 'Playfair Display', serif;
+  }
+  nav a {
+    color: #F2B705;
+    margin-right: 12px;
+    text-decoration: none;
+  }
+  section {
+    padding: 24px 16px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  h1 {
+    color: #A8432A;
+    font-family: 'Playfair Display', serif;
+  }
+  .book-btn {
+    background-color: #F2B705;
+    color: #3B2A20;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .dish {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #A8432A;
+    padding: 8px 0;
+  }
+  .hidden { display: none; }
+  #booking-form input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #A8432A;
+    border-radius: 8px;
+    font-family: inherit;
+  }
+    .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .wa-btn {
+    background-color: #25D366;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+  }@media (min-width: 768px) {
+    header { padding: 24px 48px; }
+    header h2 { font-size: 32px; }
+    nav a { font-size: 18px; margin-right: 24px; }
+    h1 { font-size: 40px; }
+    section { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h2>Tenitoh</h2>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="home">
+  <h1>Welcome to Tenitoh Restaurant, Bar and Accommodation</h1>
+  <p>Traditional dishes, swimming and horse riding.</p>
+  <div class="btn-row">
+  <button class="book-btn" onclick="toggleForm()">Book a table</button>
+  <a class="wa-btn" href="https://wa.me/254791845472?text=Hello%20Tenitoh">Chat on WhatsApp</a>
+  </div>
+  <div id="booking-form" class="hidden">
+    <input id="name" placeholder="Your name">
+    <input id="guests" type="number" placeholder="Number of guests">
+    <button class="book-btn" onclick="confirmBooking()">Send request</button>
+    <p id="message"></p>
+  </div>
+</section>
+
+<section id="services">
+  <h1>Our Services</h1>
+  <ul>
+    <li>Traditional dishes</li>
+    <li>Bar</li>
+    <li>Accommodation</li>
+    <li>Swimming</li>
+    <li>Horse riding</li>
+  </ul>
+</section>
+
+<section id="menu">
+  <h1>Our Menu</h1>
+  <div class="dish"><span>Ugali and Beef</span><span>KSh 350</span></div>
+  <div class="dish"><span>Pilau</span><span>KSh 300</span></div>
+  <div class="dish"><span>Mukimo</span><span>KSh 250</span></div>
+  <div class="dish"><span>Rice and Beef</span><span>KSh 320</span></div>
+  <div class="dish"><span>Fries</span><span>KSh 300</span></div>
+</section>
+
+<section id="contact">
+  <h1>Contact Us</h1>
+  <p>Location: Macedonia, Narok, Kenya</p>
+  <p>Phone: 254791845472</p>
+  <p>Open daily: 8:00 AM to 10:00 PM</p>
+</section>
+
+<script>
+function toggleForm() {
+  document.getElementById("booking-form").classList.toggle("hidden");
+}
+
+function confirmBooking() {
+  var name = document.getElementById("name").value;
+  var guests = document.getElementById("guests").value;
+
+  if (name === "" || guests === "") {
+    document.getElementById("message").textContent =
+      "Please enter your name and number of guests.";
+    return;
+  }
+
+  var phone = "254XXXXXXXXX";
+  var text = "Hello Tenitoh, I would like to book a table. Name: " +
+    name + ". Guests: " + guests + ".";
+
+  document.getElementById("message").textContent =
+    "Opening WhatsApp, please tap send to confirm.";
+  window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text));
+}
+</script>
+
+</body>
+</html>
