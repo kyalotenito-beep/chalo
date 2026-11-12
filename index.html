@@ -44,24 +44,7 @@
     font-size: 18px;
     font-weight: bold;
   }
-  .dish {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dashed #A8432A;
-    padding: 8px 0;
-  }
-  .hidden { display: none; }
-  #booking-form input {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #A8432A;
-    border-radius: 8px;
-    font-family: inherit;
-  }
-    .btn-row {
+  .btn-row {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
@@ -74,12 +57,50 @@
     font-size: 18px;
     font-weight: bold;
     text-decoration: none;
-  }@media (min-width: 768px) {
+  }
+  .hero-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .dish {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #A8432A;
+    padding: 8px 0;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .gallery img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .hidden { display: none; }
+  #booking-form input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #A8432A;
+    border-radius: 8px;
+    font-family: inherit;
+  }
+  @media (min-width: 768px) {
     header { padding: 24px 48px; }
     header h2 { font-size: 32px; }
     nav a { font-size: 18px; margin-right: 24px; }
     h1 { font-size: 40px; }
     section { padding: 48px 24px; }
+    .hero-img { height: 380px; }
+    .gallery { grid-template-columns: 1fr 1fr 1fr; }
   }
 </style>
 </head>
@@ -91,16 +112,18 @@
     <a href="#home">Home</a>
     <a href="#menu">Menu</a>
     <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <section id="home">
+  <img class="hero-img" src="restaurant.jpg" alt="Inside Tenitoh Restaurant">
   <h1>Welcome to Tenitoh Restaurant, Bar and Accommodation</h1>
   <p>Traditional dishes, swimming and horse riding.</p>
   <div class="btn-row">
-  <button class="book-btn" onclick="toggleForm()">Book a table</button>
-  <a class="wa-btn" href="https://wa.me/254791845472?text=Hello%20Tenitoh">Chat on WhatsApp</a>
+    <button class="book-btn" onclick="toggleForm()">Book a table</button>
+    <a class="wa-btn" href="https://wa.me/254791845472?text=Hello%20Tenitoh">Chat on WhatsApp</a>
   </div>
   <div id="booking-form" class="hidden">
     <input id="name" placeholder="Your name">
@@ -130,10 +153,20 @@
   <div class="dish"><span>Fries</span><span>KSh 300</span></div>
 </section>
 
+<section id="gallery">
+  <h1>Gallery</h1>
+  <div class="gallery">
+    <img src="ugali.jpg" alt="Ugali, beef and greens">
+    <img src="rice.jpg" alt="Rice and beef">
+    <img src="bar.jpg" alt="The bar at Tenitoh">
+    <img src="horse.jpg" alt="Horse riding at Tenitoh">
+  </div>
+</section>
+
 <section id="contact">
   <h1>Contact Us</h1>
   <p>Location: Macedonia, Narok, Kenya</p>
-  <p>Phone: 254791845472</p>
+  <p>Phone: 0791845472</p>
   <p>Open daily: 8:00 AM to 10:00 PM</p>
 </section>
 
@@ -152,13 +185,13 @@ function confirmBooking() {
     return;
   }
 
-  var phone = "254XXXXXXXXX";
+  var phone = "254791845472";
   var text = "Hello Tenitoh, I would like to book a table. Name: " +
     name + ". Guests: " + guests + ".";
 
   document.getElementById("message").textContent =
     "Opening WhatsApp, please tap send to confirm.";
-  window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text));
+  window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
 }
 </script>
 
