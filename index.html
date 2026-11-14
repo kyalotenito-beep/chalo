@@ -172,36 +172,143 @@
   .room img, .gallery img {
     width: 100%;
     max-width: 100%;
+  }  /* Three-line menu */
+  html { scroll-padding-top: 90px; }
+  .header-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .menu-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .menu-btn span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: var(--yellow);
+    border-radius: 2px;
+  }
+  nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 220px;
+    flex-direction: column;
+    gap: 0;
+    overflow: visible;
+    background: var(--ochre);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+  nav.open { display: flex; }
+  nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 17px;
+    border-top: 1px solid rgba(255,248,231,0.2);
+  }
+
+  /* Book gallery */
+  .book { max-width: 520px; margin: 22px auto 0; perspective: 1200px; }
+  .book-page {
+    background: #ffffff;
+    padding: 10px 10px 4px 18px;
+    border-radius: 4px 12px 12px 4px;
+    border-left: 8px solid var(--ochre);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    backface-visibility: hidden;
+  }
+  .book-page img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  #book-cap { text-align: center; font-weight: 500; margin: 8px 0 6px 0; }
+  .book-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  .book-controls span { font-weight: 600; }  /* Video-style hero */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: #3B2A20;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('restaurant.jpg') center / cover no-repeat;
+    animation: slowzoom 18s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(59,42,32,0.55), rgba(59,42,32,0.75));
+    z-index: 1;
+  }
+  .hero > div {
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1.4s ease-out both;
+  }
+  @keyframes slowzoom {
+    from { transform: scale(1) translate(0, 0); }
+    to   { transform: scale(1.18) translate(-2%, -1%); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before, .hero > div { animation: none; }
   }</style>
 </head>
 <body>
 
 <header>
-  <div class="brand">
-  <svg width="46" height="46" viewBox="0 0 48 48" aria-hidden="true">
-    <circle cx="24" cy="24" r="22" fill="none" stroke="#F2B705" stroke-width="2"/>
-    <circle cx="24" cy="26" r="8" fill="#F2B705"/>
-    <path d="M24 15v-3M16.2 18.2l-2.1-2.1M31.8 18.2l2.1-2.1M13 26h-3M35 26h3" stroke="#F2B705" stroke-width="2" stroke-linecap="round"/>
-    <path d="M12 36q3-3 6 0t6 0t6 0t6 0" fill="none" stroke="#FFF8E7" stroke-width="2.5" stroke-linecap="round"/>
-  </svg>
-  <div class="brand-text">
-    <strong>Paradise</strong>
-    <small>Restaurant · Bar · Stay</small>
+  <div class="header-inner">
+    <div class="brand">
+      <svg width="46" height="46" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="22" fill="none" stroke="#F2B705" stroke-width="2"/>
+        <circle cx="24" cy="26" r="8" fill="#F2B705"/>
+        <path d="M24 15v-3M16.2 18.2l-2.1-2.1M31.8 18.2l2.1-2.1M13 26h-3M35 26h3" stroke="#F2B705" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 36q3-3 6 0t6 0t6 0t6 0" fill="none" stroke="#FFF8E7" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div class="brand-text">
+        <strong>Paradise</strong>
+        <small>Restaurant · Bar · Stay</small>
+      </div>
+    </div>
+    <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav">
+      <a href="#menu">Menu</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rooms">Accommodation</a>
+      <a href="#contact">Location</a>
+    </nav>
   </div>
-  </div>
-  <nav>
-    <a href="#home">Home</a><a href="#about">About</a>
-    <a href="#menu">Menu</a>
-    <a href="#services">Services</a>
-    <a href="#rooms">Rooms</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+</header> 
 <section id="home">
   <img class="hero-img" src="restaurant.jpg" alt="Inside Paradise Restaurant">
   <h1>Karibu  Paradise Restaurant, Bar and Accommodation</h1>
-  <p style="max-width:640px; margin:0 auto;">Enjoy traditional Maasai and Kamba foods,a lively bar, comfortable rooms, swimming and horse riding activities, all in one place at paradise, Narok.</p>
+  <p style="max-width:640px; margin:0 auto;"><p>Paradise Restaurant, Bar and Accommodation, proudly owned by Master Mind. Come hungry, leave happy: authentic Maasai, Kamba and Luo dishes, a lively bar, comfortable rooms, swimming and horse riding, all in one beautiful place in Narok.</p></p>
   <div class="btn-row">
     <button class="book-btn" onclick="toggleForm()">Book a table</button>
     <a class="wa-btn" href="https://wa.me/254791845472?text=Hello%20Paradise">Chat on WhatsApp</a>
@@ -217,9 +324,10 @@
 <a href="#spacious rooms"></a><section id="about" class="block">
   <div class="container">
     <h2>About Paradise</h2>
-    <p>Paradise Restaurant, Bar and Accommodation is a place to eat, relax and stay in Narok. Our kitchen serves traditional dishes of the Maasai, Kamba and Luo communities, including ugali, beef, rice, mukimo and pilau.</p>
-    <p>After your meal, enjoy a drink at our bar, take a swim, go horse riding, or book a room and stay the night. Whether you come with family, friends or colleagues, there is something for everyone.</p>
-    <p><strong>Open daily:</strong> 8:00 AM to 10:00 PM</p>
+    <p>Welcome to Paradise, a home away from home owned and run by Master Mind. We started with one idea: to give every guest great food, a warm welcome and a place to unwind.</p>
+<p>Our kitchen serves traditional Maasai, Kamba and Luo dishes such as ugali, beef, rice, mukimo and pilau, cooked fresh every day. After your meal, enjoy a drink at our bar, take a swim, go horse riding, or book a room and stay the night.</p>
+<p>Whether you come with family, friends or colleagues, at Paradise you are always among friends. Karibu!</p>
+<p><strong>Open daily:</strong> 8:00 AM to 10:00 PM</p>
   </div>
 </section><section id="services">
   <h1>Our Services</h1>
@@ -262,13 +370,21 @@
   <div class="dish"><span>Hot Dogs</span><span>KSh 200</span></div>
 </section>
 
-<section id="gallery">
-  <h1>Gallery</h1>
-  <div class="gallery">
-    <img src="ugali.jpg" alt="Ugali, beef and greens">
-    <img src="rice.jpg" alt="Rice and beef">
-    <img src="bar.jpg" alt="The bar at Paradise">
-    <img src="horse.jpg" alt="Horse riding at Paradise">
+<section id="gallery" class="block">
+  <div class="container">
+    <h2>Gallery</h2>
+    <p>Tap Next or swipe to turn the page.</p>
+    <div class="book" id="book">
+      <div class="book-page" id="book-page">
+        <img id="book-img" src="ugali.jpg" alt="Ugali, beef and greens">
+        <p id="book-cap">Ugali, beef and greens</p>
+      </div>
+      <div class="book-controls">
+        <button class="btn btn-yellow" onclick="flip(-1)">‹ Back</button>
+        <span id="book-count">1 / 5</span>
+        <button class="btn btn-yellow" onclick="flip(1)">Next ›</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -302,7 +418,65 @@ function confirmBooking() {
     "Opening WhatsApp, please tap send to confirm.";
   window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
 }
-</script>
+function toggleMenu() {
+  document.getElementById("main-nav").classList.toggle("open");
+}
+var navLinks = document.querySelectorAll("#main-nav a");
+for (var i = 0; i < navLinks.length; i++) {
+  navLinks[i].addEventListener("click", function () {
+    document.getElementById("main-nav").classList.remove("open");
+  });
+}
+
+var photos = [
+  { src: "ugali.jpg", cap: "Ugali, beef and greens" },
+  { src: "rice.jpg", cap: "Rice and beef" },
+  { src: "bar.jpg", cap: "The bar at Paradise" },
+  { src: "horse.jpg", cap: "Horse " },
+  { src: "pool.jpg", cap: " swimming pool" },
+  {src:  "accomm.jpg",cap: "rooms"},
+];
+var current = 0;
+var flipping = false;
+
+function showPhoto() {
+  document.getElementById("book-img").src = photos[current].src;
+  document.getElementById("book-img").alt = photos[current].cap;
+  document.getElementById("book-cap").textContent = photos[current].cap;
+  document.getElementById("book-count").textContent = (current + 1) + " / " + photos.length;
+}
+
+function flip(dir) {
+  if (flipping) return;
+  flipping = true;
+  var page = document.getElementById("book-page");
+  page.style.transition = "transform 0.35s ease-in";
+  page.style.transformOrigin = dir > 0 ? "left center" : "right center";
+  page.style.transform = "rotateY(" + (dir > 0 ? -90 : 90) + "deg)";
+  setTimeout(function () {
+    current = (current + dir + photos.length) % photos.length;
+    showPhoto();
+    page.style.transition = "none";
+    page.style.transformOrigin = dir > 0 ? "right center" : "left center";
+    page.style.transform = "rotateY(" + (dir > 0 ? 90 : -90) + "deg)";
+    void page.offsetWidth;
+    page.style.transition = "transform 0.35s ease-out";
+    page.style.transform = "rotateY(0deg)";
+    setTimeout(function () { flipping = false; }, 360);
+  }, 350);
+}
+
+var startX = 0;
+var bookEl = document.getElementById("book");
+bookEl.addEventListener("touchstart", function (e) {
+  startX = e.changedTouches[0].clientX;
+});
+bookEl.addEventListener("touchend", function (e) {
+  var diff = e.changedTouches[0].clientX - startX;
+  if (diff < -40) flip(1);
+  if (diff > 40) flip(-1);
+});</script>
 
 </body>
 </html>
+&copy; 2026 Paradise Restaurant, Bar and Accommodation. Owned by Master Mind.
